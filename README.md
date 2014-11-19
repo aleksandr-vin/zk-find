@@ -8,8 +8,19 @@ FIND utility for Zookeeper
 Usage
 -----
 
-``python ./zk-find [hosts] [root]``
+``python zk-find [hosts] [root]``
 
+Example
+-------
+
+``python zk-find.py 192.168.56.110:2181 ''``
+
+```
+/zookeeper
+/zookeeper/quota
+/mydata
+/mydata/bucket
+```
 
 Dependencies
 ------------
