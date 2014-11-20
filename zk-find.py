@@ -1,6 +1,9 @@
 #
 # This is a FIND utility for Zookeeper
 #
+# Author: Aleksandr Vinokurov <aleksandr.vin@gmail.com>
+# Url:    https://github.com/aleksandr-vin/zk-find
+#
 
 import logging
 import logging.config
