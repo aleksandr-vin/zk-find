@@ -8,12 +8,12 @@ FIND utility for Zookeeper
 Usage
 -----
 
-``python zk-find [hosts] [root]``
+``python zk-find.py [-h] [--hosts HOST:PORT[,HOST:PORT]] [--name REGEXP] [root]``
 
 Example
 -------
 
-``python zk-find.py 192.168.56.110:2181 ''``
+``python zk-find.py --hosts 192.168.56.110:2181``
 
 ```
 /zookeeper
