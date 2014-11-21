@@ -28,6 +28,10 @@ def list_children(parent,prog):
             if prog:
                 if prog.search(node):
                     print path
+                else:
+                    pass
+            else:
+                print path
             list_children(path,prog)
     except NoNodeError:
         pass
