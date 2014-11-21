@@ -4,10 +4,15 @@
 # Author: Aleksandr Vinokurov <aleksandr.vin@gmail.com>
 # Url:    https://github.com/aleksandr-vin/zk-find
 #
+from __future__ import print_function
 
 import logging
 import logging.config
 import argparse
+import sys
+
+def error(*objs):
+    print("ERROR: ", *objs, file=sys.stderr)
 
 try:
     logging.config.fileConfig('logging.conf')
@@ -19,6 +24,7 @@ logger = logging.getLogger('zk-find')
 from kazoo.client     import KazooClient
 from kazoo.client     import KazooState
 from kazoo.exceptions import NoNodeError
+from kazoo.handlers.threading import TimeoutError
 import re
 
 def list_children(parent,prog):
@@ -27,16 +33,16 @@ def list_children(parent,prog):
             path = parent + "/" + node
             if prog:
                 if prog.search(node):
-                    print path
+                    print(path)
                 else:
                     pass
             else:
-                print path
+                print(path)
             list_children(path,prog)
     except NoNodeError:
         pass
     except ValueError as e:
-        print 'ValueError: %s' % (e)
+        error(e)
 
 def my_listener(state):
     if state == KazooState.LOST:
@@ -71,10 +77,13 @@ if __name__ == "__main__":
     settings = parser.parse_args()
     zk = KazooClient(hosts=settings.hosts)
     zk.add_listener(my_listener)
-    zk.start()
-    global prog
-    prog = None
-    if (settings.name):
-        prog = re.compile(settings.name)
-    list_children(settings.root,prog)
-    zk.stop()
+    try:
+        zk.start()
+        global prog
+        prog = None
+        if (settings.name):
+            prog = re.compile(settings.name)
+        list_children(settings.root,prog)
+        zk.stop()
+    except TimeoutError as e:
+        error(e)
