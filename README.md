@@ -8,7 +8,18 @@ FIND utility for Zookeeper
 Usage
 -----
 
-``python zk-find.py [-h] [--hosts HOST:PORT[,HOST:PORT]] [--name REGEXP] [root]``
+```
+usage: zk-find.py [-h] [--hosts HOST:PORT[,HOST:PORT]] [--name REGEXP] [root]
+
+positional arguments:
+  root                  root of the search
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --hosts HOST:PORT[,HOST:PORT]
+                        comma-separated list of hosts to connect to (default: 127.0.0.1:2181)
+  --name REGEXP         regexp for matching node names
+```
 
 Example
 -------
