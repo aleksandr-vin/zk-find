@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #
 # This is a FIND utility for Zookeeper
 #
@@ -24,7 +25,7 @@ logger = logging.getLogger('zk-find')
 from kazoo.client     import KazooClient
 from kazoo.client     import KazooState
 from kazoo.exceptions import NoNodeError
-from kazoo.handlers.threading import TimeoutError
+from kazoo.handlers.threading import KazooTimeoutError as TimeoutError
 import re
 
 def list_children(parent,prog):
